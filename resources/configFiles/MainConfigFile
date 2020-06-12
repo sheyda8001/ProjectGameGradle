@@ -1,0 +1,8 @@
+RESOURCE_URL =resources/
+PLAY_CONFIG = resources/configFiles/Graphics/PlayConfig
+STATUS_CONFIG = resources/configFiles/Graphics/StatusConfig
+STORE_CONFIG= resources/configFiles/Graphics/StoreConfig
+COLLECTIONS_CONFIG= resources/configFiles/Graphics/CollectionConfig
+MENU_CONFIG= resources/configFiles/Graphics/MenuConfig
+FRAME_CONFIG=resources/configFiles/Graphics/FrameConfig
+PANEL_CONFIG_FILE=resources/configFiles/Graphics/PanelConfig
