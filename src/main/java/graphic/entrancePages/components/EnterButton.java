@@ -1,8 +1,11 @@
 package graphic.entrancePages.components;
 
 import graphic.Components;
+import graphic.entrancePages.components.error.Error;
+import graphic.entrancePages.components.error.ErrorFrame;
 import graphic.mediator.Mediator;
-import logics.entranceRelated.Entrance;
+import log.Log;
+import logics.entranceRelated.Login;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,14 +23,7 @@ public class EnterButton extends JButton implements Components {
     }
     @Override
     protected void fireActionPerformed(ActionEvent actionEvent) {
-//        if (!Entrance.loginPermission(tname.getText().toString(), tpass.getText().toString(), "register")) {
-//
-//            game.Main.getWindow().setWindowPanel(entrancePage());
-//            ErrorFrame errorFrame = new ErrorFrame(Error.REGISTER);
-//        } else {
-//            Log.makelog();
-//            game.Main.getWindow().setWindowPanel(mainMenu());
-//        }
+       mediator.login();
     }
     public String getName(){
         return "enter";

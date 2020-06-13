@@ -3,8 +3,12 @@ package graphic.entrancePages.entrancePage;
 import graphic.Components;
 import graphic.FramePanelInterface;
 import graphic.entrancePages.components.*;
+import graphic.entrancePages.components.error.Error;
+import graphic.entrancePages.components.error.ErrorFrame;
 import graphic.entrancePages.registerPage.RegisterPage;
 import graphic.mainPanel.MainPanel;
+import log.Log;
+import logics.entranceRelated.Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +20,6 @@ public class EntrancePageEditor implements EntranceMediator {
    private JLabel pass;
    private EnterButton signin;
    private RegisterButton register;
-   private MainPanel panel=null;
-   private String name1,pass1;
    private FramePanelInterface framePanelInterface=FramePanelInterface.getInstance();
     @Override
     public void registerComponent(Components component) {
@@ -36,13 +38,22 @@ public class EntrancePageEditor implements EntranceMediator {
             case("nameBox") :
                 tname=(NameBox)component;
                 break;
+            case("register1") :
+
         }
     }
-
+@Override
 public void setRegister()
 {
     framePanelInterface.setPanel( new RegisterPage());
 }
+
+    private void refreshSignInPage() {
+        framePanelInterface.setPanel( new EntrancePage());
+    }
+
+
+
     @Override
     public void createGUI(MainPanel panel) {
         name = new JLabel("Name :");
@@ -73,33 +84,22 @@ public void setRegister()
         panel.add(signin);
     }
 
+    @Override
+    public void register() {
 
+    }
 
     @Override
-    public void addName(String name) {
-      this.name1=tname.getText();
-    }
-    public String getName(String name) {
-        return this.name1;
-    }
-    @Override
-    public void addPass(String pass) {
-       this.pass1=tpass.getText();
-    }
-    public String getPass1()
-    {
-        return this.pass1;
+    public void login() {
+        if(Login.loginPermission(tname.getText(),tpass.getText(),"enter"))
+        {
+            Log.makelog();
+        }
+        else{
+            ErrorFrame errorFrame = new ErrorFrame(Error.SIGNIN);
+            refreshSignInPage();
+
+        }
     }
 
-
-    @Override
-    public void setEnter() {
-        //    framePanelInterface.setPanel();
-
-    }
-
-    public MainPanel getPanel()
-    {
-        return this.panel;
-    }
 }

@@ -3,7 +3,11 @@ package graphic.entrancePages.registerPage;
 import graphic.Components;
 import graphic.FramePanelInterface;
 import graphic.entrancePages.components.*;
+import graphic.entrancePages.components.error.Error;
+import graphic.entrancePages.components.error.ErrorFrame;
 import graphic.mainPanel.MainPanel;
+import log.Log;
+import logics.entranceRelated.Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +17,8 @@ public class RegisterPageEditor implements EntranceMediator {
     private PassBox tpass;
     private JLabel name;
     private JLabel pass;
-    private EnterButton signin;
-    //private RegisterButton register;
+    //private EnterButton signin;
+    private RegisterButton1 register;
     private MainPanel panel = null;
     private String name1, pass1;
     private FramePanelInterface framePanelInterface = FramePanelInterface.getInstance();
@@ -26,9 +30,9 @@ public class RegisterPageEditor implements EntranceMediator {
 //            case ("register"):
 //                register = (RegisterButton) component;
 //                break;
-            case ("enter"):
+            case ("register1"):
 
-                signin = (EnterButton) component;
+                register = (RegisterButton1) component;
                 break;
             case ("passBox"):
                 tpass = (PassBox) component;
@@ -57,9 +61,9 @@ public class RegisterPageEditor implements EntranceMediator {
         tpass.setFont(new Font("Arial", Font.PLAIN, 15));
         tpass.setSize(200, 40);
         tpass.setLocation(panel.getWidth() / 8 + name.getWidth(), 150);
-        signin.setFont(new Font("Arial", Font.PLAIN, 15));
-        signin.setSize(100, 20);
-        signin.setLocation((panel.getWidth() - 100) / 2, 200);
+        register.setFont(new Font("Arial", Font.PLAIN, 15));
+        register.setSize(100, 20);
+        register.setLocation((panel.getWidth() - 100) / 2, 200);
 //        register.setFont(new Font("Arial", Font.PLAIN, 15));
 //        register.setSize(100, 20);
        // register.setLocation((panel.getWidth() - 100) / 2, 250);
@@ -68,27 +72,11 @@ public class RegisterPageEditor implements EntranceMediator {
         panel.add(tname);
         panel.add(tpass);
        // panel.add(register);
-        panel.add(signin);
+        panel.add(register);
     }
 
-
-
-    @Override
-    public void addName(String name) {
-        this.name1 = tname.getText();
-    }
-
-    public String getName(String name) {
-        return this.name1;
-    }
-
-    @Override
-    public void addPass(String pass) {
-        this.pass1 = tpass.getText();
-    }
-
-    @Override
-    public void setEnter() {
+    private void refreshRegisterPage() {
+        framePanelInterface.setPanel( new RegisterPage());
 
     }
 
@@ -97,13 +85,20 @@ public class RegisterPageEditor implements EntranceMediator {
 
     }
 
-    public String getPass1() {
-        return this.pass1;
+    @Override
+    public void register() {
+        if (Login.loginPermission(tname.getText(),tpass.getText(),"register")) {
+            Log.makelog();
+        } else {
+            ErrorFrame errorFrame = new ErrorFrame(Error.REGISTER);
+            refreshRegisterPage();
+        }
+    }
+
+    @Override
+    public void login() {
+
     }
 
 
-
-    public MainPanel getPanel() {
-        return this.panel;
-    }
 }

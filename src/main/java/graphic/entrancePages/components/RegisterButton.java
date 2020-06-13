@@ -1,7 +1,12 @@
 package graphic.entrancePages.components;
 
+import game.Main;
 import graphic.Components;
+import graphic.entrancePages.components.error.Error;
+import graphic.entrancePages.components.error.ErrorFrame;
 import graphic.mediator.Mediator;
+import log.Log;
+import logics.entranceRelated.Login;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
