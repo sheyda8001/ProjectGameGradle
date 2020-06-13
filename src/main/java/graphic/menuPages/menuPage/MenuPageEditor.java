@@ -1,4 +1,4 @@
 package graphic.menuPages.menuPage;
 
-public class MenuPageEditor {
+public class MenuPageEditor  {
 }
